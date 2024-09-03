@@ -36,8 +36,7 @@ class Package:
         # The address for package 9 will change at 10:20
         if self.package_id == 9:
             address_change_time = timedelta(hours=10, minutes=20)
-            # Address before 10:20
-            print('address_change_time', address_change_time)
+            # Address changes at 10:20
             if time_requested >= address_change_time:
                 self.address = '410 S State St'
                 self.city = 'Salt Lake City'
