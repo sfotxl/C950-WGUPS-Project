@@ -1,5 +1,5 @@
 from enum import Enum
-
+from datetime import timedelta
 
 # enum for delivery statuses
 class DeliveryStatus(Enum):
@@ -33,6 +33,17 @@ class Package:
 
     # Method for updating delivery status as a particular time
     def update_status(self, time_requested, truck_departure_time):
+        # The address for package 9 will change at 10:20
+        if self.package_id == 9:
+            address_change_time = timedelta(hours=10, minutes=20)
+            # Address before 10:20
+            print('address_change_time', address_change_time)
+            if time_requested >= address_change_time:
+                self.address = '410 S State St'
+                self.city = 'Salt Lake City'
+                self.state = 'UT'
+                self.zipcode = '84111'
+
         if time_requested < truck_departure_time:
             self.status = DeliveryStatus.AT_HUB
         elif self.delivery_time < time_requested:
